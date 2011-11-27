@@ -1,0 +1,13 @@
+# Compiled Files
+.egg
+.pyc
+
+# temporary files
+.DS_Store
+.swp
+.swo
+
+# Ignore the build, dist and egg files
+build
+dist
+*.egg-info
