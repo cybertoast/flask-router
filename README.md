@@ -14,6 +14,7 @@ mkdir extensions
 ```
 
 Put flask_router.py into the extensions folder so that your project structure looks like:
+
     main.py
     extensions
         flask_router.py
