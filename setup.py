@@ -3,6 +3,9 @@ Flask-Router
 -------------
 
 Provides for centralized routing with lazy-loaded targets
+
+    :copyright: (c) 2011 Sundar Raman, all rights reserved
+    :license: BSD, see LICENSE for more details.
 """
 from setuptools import setup
 

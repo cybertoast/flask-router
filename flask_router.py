@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+"""
+    :copyright: (c) 2011 Sundar Raman, all rights reserved
+    :license: BSD, see LICENSE for more details.
+"""
+
 from __future__ import absolute_import
 from flask import _request_ctx_stack
 
