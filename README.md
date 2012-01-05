@@ -29,3 +29,15 @@ if os.path.exists(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 
     sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'extensions')))
 ```
 
+# CAVEATS and Gotchas
+
+Note that in order to avoid blueprint name confusion, the endpoint syntax in 
+flask_router uses colon (:) instead of period (.). 
+So the syntax for url_for() needs to replace the separator as follows:
+eg. `url_for("views.api.index")` becomes `url_for("views:api:index")`
+See notes in flask_router for more details
+
+If you do NOT replace the colons you will get the following error:
+    `BuildError: ('views.api.index', {}, None)`
+since the endpoint is not found.
+
