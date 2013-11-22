@@ -6,8 +6,15 @@
 """
 
 from __future__ import absolute_import
-from flask import _request_ctx_stack
 
+__version_info__ = ('0', '6', '0')
+__version__ = '.'.join(__version_info__)
+__author__ = 'Sundar Raman'
+__license__ = 'BSD'
+__copyright__ = '(c) 2013 by Sundar Raman'
+__all__ = ['Router']
+
+from flask import _request_ctx_stack
 from werkzeug import import_string, cached_property
 from werkzeug.routing import BaseConverter
 import re
