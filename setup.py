@@ -1,40 +1,36 @@
-"""
-Flask-Router
--------------
+'''
+    Flask-Router
+    -------------
 
-Provides for centralized routing with lazy-loaded targets
+    Centralized routes management for Flask
 
-    :copyright: (c) 2011 Sundar Raman, all rights reserved
-    :license: BSD, see LICENSE for more details.
-"""
+'''
+import os
+
 from setuptools import setup
+
+module_path = os.path.join(os.path.dirname(__file__), 'flask_router.py')
+version_line = [line for line in open(module_path)
+                if line.startswith('__version_info__')][0]
+
+__version__ = '.'.join(eval(version_line.split('__version_info__ = ')[-1]))
 
 setup(
     name='Flask-Router',
-    version='0.5',
-    # url='http://github.com/cybertoast/flask-router
-    
+    version=__version__,
+    url='https://github.com/cybertoast/flask-router/',
     license='BSD',
     author='Sundar Raman',
     author_email='cybertoast@gmail.com',
-    
-    description='Centralized Routes',
+    description='Centralized routes management for Flask.',
     long_description=__doc__,
-    keywords=['flask', 'route', 'url'],
-    
     py_modules=['flask_router'],
-    # if you would be using a package instead use packages instead
-    # of py_modules:
-    # packages=['flask_router'],
+    test_suite='test_router',
     zip_safe=False,
-    
-    include_package_data=True,
     platforms='any',
-    install_requires=[
-        'Flask'
-    ],
-    
+    install_requires=['Flask'],
     classifiers=[
+        'Development Status :: 4 - Beta',
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
