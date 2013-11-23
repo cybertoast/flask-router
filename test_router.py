@@ -14,14 +14,20 @@ else:
 # The main functions have to be defined outside 
 #   the RouterTestCase class, since their context
 #   would not be visible otherwise
-def show():
-    return 'show'
+def show(id=None):
+    if not id:
+        return 'show'
+    else:
+        return 'show %s' % id
 
 def create():
     return 'create'
 
 def update():
     return 'update'
+
+def regex(action=None):
+    return 'regex %s' % action
 
 
 class RouterTestCase(unittest.TestCase):
@@ -31,8 +37,10 @@ class RouterTestCase(unittest.TestCase):
         routes = [ 
             # u'route', 'controller.method', {options:value})
             ('/', 'show', {'methods':['GET']}),
+            ('/<id>', 'show', {'methods':['GET']}),
             ('/new', 'create', {'methods':['POST']}),
-            ('/update', 'update', {'methods':['PUT']})
+            ('/update', 'update', {'methods':['PUT']}),
+            ('/regex/<regex("load|get"):action>', 'regex', {'methods': ['GET']})
 
             # We'll define the DELETE method in the view function decorator
             # ('/', 'delete', {'methods':['DELETE']})
@@ -72,6 +80,26 @@ class RouterTestCase(unittest.TestCase):
             rv  = client.delete('/delete')
             self.assertEqual(rv.status_code, 200)
             self.assertEqual(rv.data, 'delete')
+
+    def test_regex_routes(self):
+        with self.app.test_client() as client:
+            rv = client.get('/regex/load')
+            self.assertEqual(rv.data, 'regex load')
+
+    def test_param_routes(self):
+        with self.app.test_client() as client:
+            rv = client.get('/some-id')
+            self.assertEqual(rv.data, 'show some-id')
+
+    def test_failures(self):
+        with self.app.test_client() as client:
+            rv = client.get('/regex/nothing')
+            self.assertEqual(rv.status_code, 404)
+            rv = client.put('/')
+            self.assertEqual(rv.status_code, 405)
+            rv = client.post('/update')
+            self.assertEqual(rv.status_code, 405)
+        
 
 def suite():
     suite = unittest.TestSuite()
