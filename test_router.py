@@ -3,7 +3,7 @@ from __future__ import with_statement
 import sys
 import unittest
 
-from flask import Flask
+from flask import Flask, request
 from flask_router import Router
 
 if sys.version_info[0] < 3:
